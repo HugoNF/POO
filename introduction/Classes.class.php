@@ -22,6 +22,13 @@ class Classes
 
 
 }
+    /**
+     * @return array
+     */
+    public function getEleves()
+    {
+        return $this->Eleves;
+    }
 
     /**
      * @return mixed

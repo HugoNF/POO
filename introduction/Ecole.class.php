@@ -75,6 +75,14 @@ class Ecole
     }
 
     /**
+     * @return array
+     */
+    public function getClasses()
+    {
+        return $this->Classes;
+    }
+
+    /**
      * @param array $Classes
      */
     public function AjouterClasses(Classes $Classes)

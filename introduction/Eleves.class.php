@@ -52,4 +52,10 @@ class Eleves
     {
         return $this->Age;
     }
+
+
+    public function getNomComplet()
+    {
+        return $this->Prenom.' '.$this->Nom;
+    }
 }

@@ -72,5 +72,24 @@ echo '</pre>';
 //echo $Ecole->getNomEcole();
 
 #Je souhaite changer le nom de l'école ?
+echo '<ol>';
+$lesClasses = $Ecole->getClasses();
+foreach ($lesClasses as $objClasse){
 
+    echo '<li>';
+        echo $objClasse->getNomClasse();
 
+        echo '<ul>';
+            # On récupère les étudiants de la classe
+            $lesEtudiants = $objClasse->getEleves();
+            foreach ($lesEtudiants as $objEtudiant){
+                echo '<li>';
+                    echo $objEtudiant->getNomComplet();
+                echo '</li>';
+            }
+        echo '</ul>';
+
+    echo '</li>';
+
+}
+echo '</ol>';

@@ -1,1 +1,2 @@
-<h1><?= $article ?></h1>
+<?php
+var_dump($article);

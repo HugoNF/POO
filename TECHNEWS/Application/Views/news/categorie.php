@@ -1,1 +1,2 @@
-<h1><?= $categorie ?></h1>
+<?php
+var_dump($categories);

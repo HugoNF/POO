@@ -20,7 +20,7 @@ class Categorie
      */
     public function getIDCATEGORIE()
     {
-        return $this->_IDCATEGORIE;
+        return $this->IDCATEGORIE;
     }
 
     /**
@@ -28,7 +28,7 @@ class Categorie
      */
     public function getLIBELLECATEGORIE()
     {
-        return $this->_LIBELLECATEGORIE;
+        return $this->LIBELLECATEGORIE;
     }
 
     /**
@@ -36,7 +36,7 @@ class Categorie
      */
     public function getROUTECATEGORIE()
     {
-        return $this->_ROUTECATEGORIE;
+        return $this->ROUTECATEGORIE;
     }
 
 

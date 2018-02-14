@@ -1,11 +1,14 @@
+<?php
+
+?>
 <!--menu mobile-->
 <nav class="menu-res hidden-lg hidden-md ">
     <div class="menu-res-inner">
         <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="business.html">BUSINESS</a></li>
-            <li><a href="computing.html"> COMPUTING</a></li>
-            <li><a href="tech.html">TECH</a></li>
+            <?php foreach ($categories as $categorie):?>
+                <li><a href="<? PATH_PUBLIC. '/'. $categorie->getROUTECATEGORIE()?>"><?= $categorie->getLIBELLECATEGORIE()?></a></li>
+            <?php endforeach;?>
+
         </ul>
     </div>
 </nav>
@@ -16,7 +19,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <a href="#" class="logo">
-                        <img alt="Logo" src="<?= PATH_PUBLIC ?>/images/logo.png" />
+                        <img alt="Logo" src="<?=PATH_PUBLIC?>/images/logo.png" />
                     </a>
                 </div>
             </div>
@@ -28,18 +31,10 @@
                 <span>MENU</span>
             </div>
             <ul class="hidden-sm hidden-xs">
-                <li>
-                    <a href="index.html">Accueil </a>
-                </li>
-                <li>
-                    <a href="business.html">Business</a>
-                </li>
-                <li>
-                    <a href="computing.html">Computing</a>
-                </li>
-                <li>
-                    <a href="tech.html">Tech </a>
-                </li>
+                <?php foreach ($categories as $categorie):?>
+                    <li><a href="<? PATH_PUBLIC. '/'. $categorie->getROUTECATEGORIE()?>"><?= $categorie->getLIBELLECATEGORIE()?></a></li>
+                <?php endforeach;?>
+
             </ul>
             <div class="search-icon">
                 <div class="search-icon-inner">

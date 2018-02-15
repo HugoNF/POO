@@ -9,9 +9,9 @@ class Autoloader {
         spl_autoload_register(array(__CLASS__, 'autoload'));
     }
     public static function autoload($class){
-        echo 'Autoload pour :';
-        print_r($class);
-        echo '<br>';
+        # echo 'Autoload pour :';
+        # print_r($class);
+        # echo '<br>';
         require PATH_ROOT . '/' . $class .'.php';
 
     }

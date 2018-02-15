@@ -62,11 +62,9 @@ class AppController
         echo '</pre>';
     }
 
-    /**
-     * @return mixed
-     */
-    public function generateCategoryMenu(){
-        $db = new CategorieDb();
-        return $db->fetchAll();
-    }
+public function  getAction(){
+        return empty($_GET['action']) ? 'action' : $_GET['action'];
+}
+
+
 }

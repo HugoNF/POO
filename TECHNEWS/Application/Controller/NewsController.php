@@ -20,9 +20,20 @@ use Core\Controller\AppController;
 class NewsController extends AppController
 {
     public function indexAction(){
-        $this->render('news/index',['titre' => 'Webforcre3 Rouen !']);
+        # Connexion à la BDD
+        $articleDb = new ArticleDb;
 
-        # include_once PATH_VIEWS.'news/index.php';
+        # Récupération des Articles
+        $articles = $articleDb->fetchAll();
+
+        # Récupération des Articles en Spotlight
+        $spotlight = $articleDb->fetchAll('SPOTLIGHTARTICLE = 1');
+
+        $this->render('news/index',[
+            'articles'=>$articles, 'spotlight'=>$spotlight
+        ]);
+
+
     }
 
     public function categorieAction(){
@@ -49,5 +60,25 @@ class NewsController extends AppController
         $this->render('news/tags',['tags'=>$tags]);
     }
 
+    public function businessAction(){
+        $articleDb= new ArticleDb();
+        $articles = $articleDb->fetchAll('IDCATEGORIE = 2', '','3');
+        $this->render('news/categorie',['articles'=>$articles]);
+    }
+    public function computingAction(){
+        $articleDb= new ArticleDb();
+        $articles = $articleDb->fetchAll('IDCATEGORIE = 3', '','3');
+        $this->render('news/categorie',['articles'=>$articles]);
+    }
+    public function techAction(){
+        $articleDb= new ArticleDb();
+        $articles = $articleDb->fetchAll('IDCATEGORIE = 4', '','3');
+        $this->render('news/categorie',['articles'=>$articles]);
+    }
 
+    public function enfantsAction(){
+        $articleDb= new ArticleDb();
+        $articles = $articleDb->fetchAll('IDCATEGORIE = 5', '','3');
+        $this->render('news/categorie',['articles'=>$articles]);
+    }
 }

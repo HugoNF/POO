@@ -96,6 +96,14 @@ public function getAUTEUROBJ()
     return $this->AUTEUROBJ;
 }
 
+    /**
+     * @return \PDO
+     */
+    public function getCATEGORIEOBJ()
+    {
+        return $this->CATEGORIEOBJ;
+    }
+
 
 /**
  * @return string
@@ -104,5 +112,24 @@ public function getFULLIMAGEARTICLE(){
     return PATH_PUBLIC .'/images/product/'.
             $this->FEATUREDIMAGEARTICLE;
 }
+
+public function getACCROCHEARTICLE(){
+    // : http://php.net/manual/fr/function.mb-strimwidth.php
+
+    // Si ma chaine de caractère est à 170 je pourrais, sinon c'est inutile
+    $string = strip_tags($this->getCONTENUARTICLE());
+
+    if (strlen($string) > 170):
+
+        // Je coupe ma chaine à 170
+        $stringCut = substr($string, 0, 170);
+
+        // Je m'assure de ne pas couper de mot !
+        $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'...';
+    endif;
+    return $string;
+}
+
+
 
 }

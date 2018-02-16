@@ -11,9 +11,9 @@ namespace Application\Model\Categorie;
 
 class Categorie
 {
-    private $_IDCATEGORIE,
-            $_LIBELLECATEGORIE,
-            $_ROUTECATEGORIE;
+    private $IDCATEGORIE,
+            $LIBELLECATEGORIE,
+            $ROUTECATEGORIE;
 
     /**
      * @return mixed

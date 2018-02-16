@@ -14,6 +14,8 @@ use Application\Model\Auteur\AuteurDb;
 use Application\Model\Categorie\CategorieDb;
 use Application\Model\Tags\TagsDb;
 use Core\Controller\AppController;
+use Core\Model\DbFactory;
+use Core\Model\ORM;
 
 # Une classe peut hériter que d'une seule classe
 
@@ -42,10 +44,61 @@ class NewsController extends AppController
         $this->render('news/categorie', ['categories'=>$categories]);
     }
 
+    public function idiormAction(){
+        # Récupération des Catégories
+        DbFactory::IdiormFactory();
+        $categories = ORM::for_table('categorie')
+            ->find_result_set();
+
+        foreach($categories as $categorie) :
+            echo $categorie->LIBELLECATEGORIE . '<br>';
+        endforeach;
+
+        # Afficher la liste des Auteurs du site dans un Tableau HTML
+        $auteurs = ORM::for_table('auteur')
+        ->find_result_set();
+
+        echo '<hr><table border="1">';
+
+            foreach ($auteurs as $auteur) :
+                echo '<tr>';
+                    echo '<td>' . $auteur->IDAUTEUR . '</td>';
+                    echo '<td>' . $auteur->NOMAUTEUR . '</td>';
+                    echo '<td>' . $auteur->PRENOMAUTEUR . '</td>';
+                    echo '<td>' . $auteur->EMAILAUTEUR . '</td>';
+                echo '</tr>';
+            endforeach;
+
+        echo '</table>';
+
+    }
     public function articleAction(){
-        $articleDb      = new ArticleDb;
-        $article        = $articleDb->fetchAll();
-        $this->render('news/article',['article'=>$article]);
+        # http://localhost/technews/article/18-leslug.html
+
+        $idarticle = $_GET['idarticle'];
+        $article        = ORM::for_table('article')->find_one($idarticle);
+        $tags           = ORM::for_table('tags')->where('IDTAGS', $idarticle)->find_result_set();
+        $suggestions    = ORM::for_table('article')->where('IDCATEGORIE', $article->IDCATEGORIE)->limit(4)->find_result_set();
+        $auteur         = ORM::for_table('auteur')->where('IDAUTEUR',$article->IDAUTEUR)->find_one();
+        $this->render('news/article',['article'=>$article,'tags'=>$tags,'suggestions'=>$suggestions,'auteur'=>$auteur]);
+        # Récupération de l'Article
+
+        # Récupération des Articles de la Catégorie (suggestions)
+
+        # Je récupère uniquement, les articles de la même
+        # catégorie que mon article
+
+        # Sauf mon article en cours
+
+        # 3 articles maximum
+
+        # Par ordre décroissant
+
+        # Je récupère les résultats
+
+        # Transmission à la Vue.
+
+        //$this->render('news/article');
     }
 
     public function auteurAction(){
@@ -82,3 +135,4 @@ class NewsController extends AppController
         $this->render('news/categorie',['articles'=>$articles]);
     }
 }
+

@@ -19,11 +19,11 @@ $spotlight  = $params['spotlight'];
                 <article class="spotlight-item">
                     <div class="spotlight-img">
                         <img alt="<?= $slide->getTITREARTICLE()?>" src="<?= $slide->getFULLIMAGEARTICLE() ?>" class="img-responsive" />
-                        <a href="#" class="cate-tag"><?= $slide->getCATEGORIEOBJ()->getLIBELLECATEGORIE() ?></a>
+                        <a href="<?= $this->generateUrl('news',strtolower($slide->getCATEGORIEOBJ()->getLIBELLECATEGORIE())); ?>" class="cate-tag"><?= $slide->getCATEGORIEOBJ()->getLIBELLECATEGORIE() ?></a>
                     </div>
                     <div class="spotlight-item-caption">
                         <h2 class="font-heading">
-                            <a href="javascript:void(0)">
+                            <a href="<?= $this->generateUfm('article/$1-$2.html', [$slide->getIDARTICLE(), $this->slugify($slide->getTITREARTICLE())]) ?>">
                                 <?= $slide->getTITREARTICLE() ?>
                             </a>
                         </h2>
@@ -53,9 +53,9 @@ $spotlight  = $params['spotlight'];
 						<a href="#">
 							<img alt="" src="<?= $article->getFULLIMAGEARTICLE(); ?>" />
 						</a>
-						<a href="#" class="cate-tag"><?= $article->getCATEGORIEOBJ()->getLIBELLECATEGORIE(); ?></a>
+						<a href="<?= $this->generateUrl('news',strtolower($article->getCATEGORIEOBJ()->getLIBELLECATEGORIE())); ?>" class="cate-tag"><?= $article->getCATEGORIEOBJ()->getLIBELLECATEGORIE(); ?></a>
 					</div>
-					<h3><a href="#"><?= $article->getTITREARTICLE(); ?></a></h3>
+					<h3><a href="<?= $this->generateUfm('article/$1-$2.html', [$article->getIDARTICLE(), $this->slugify($article->getTITREARTICLE())]) ?>"><?= $article->getTITREARTICLE(); ?></a></h3>
 					<div class="meta-post">
 						<a href="#">
                             <?= $article->getAUTEUROBJ()->getNOMCOMPLET(); ?>

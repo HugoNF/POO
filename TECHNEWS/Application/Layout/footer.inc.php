@@ -16,7 +16,7 @@
                 <h3>NOS CATEGORIES</h3>
                 <ul class="list-category">
                     <?php foreach ($categories as $categorie):?>
-                        <li><a href="<? PATH_PUBLIC. '/'. $categorie->getROUTECATEGORIE()?>"><?= $categorie->getLIBELLECATEGORIE()?></a></li>
+                        <li><a href="<?= PATH_PUBLIC. '/'. $categorie->getROUTECATEGORIE()?>"><?= $categorie->getLIBELLECATEGORIE()?></a></li>
                     <?php endforeach;?>
                 </ul>
             </div>

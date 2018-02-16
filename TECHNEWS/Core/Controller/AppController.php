@@ -8,13 +8,17 @@
 
 namespace Core\Controller;
 
-
-use Application\Model\Categorie\CategorieDb;
+use Core\Model\DbFactory;
+use Core\Model\Helper;
 
 class AppController
 {
+    use Helper;
     private $_viewparams;
 
+public function __construct(){
+    DbFactory::IdiormFactory();
+}
     /**
      * Permet de générer l'affichage
      *de la vue en paramètre.
@@ -27,14 +31,32 @@ class AppController
 
         extract($this->_viewparams);
 
-        # Chargement du Header
-        include_once  PATH_HEADER;
+
 
         # Chargement de la Vue
-        include_once  PATH_VIEWS . '/' . $view . '.php';
+        $view =   PATH_VIEWS . '/' . $view . '.php';
+        if (file_exists($view)):
+            # Chargement du Header
+            include_once  PATH_HEADER;
 
-        # Chargement du Footer
-        include_once  PATH_FOOTER;
+            # Chargement de la vue
+            include_once $view;
+
+            # Chargement du Footer
+            include_once  PATH_FOOTER;
+            else :
+
+            $this->$this->render('errors/404',[
+                'message'=>'Aucune vue correspondante'
+            ]);
+
+         endif;
+
+    }
+
+    protected function renderJson(Array $params){
+        header('Content-Type: Application/json');
+        echo json_encode($params);
     }
 
     /**
@@ -53,7 +75,7 @@ class AppController
      * ou le paramètre passé à la fonction.
      * @param array $params
      */
-    public function debug(Array $params = []){
+    public function debug($params = []){
         if(empty($params)) :
             $params = $this->_viewparams;
         endif;
